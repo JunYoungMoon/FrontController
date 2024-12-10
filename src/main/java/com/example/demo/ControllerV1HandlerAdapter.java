@@ -19,6 +19,7 @@ public class ControllerV1HandlerAdapter implements MyHandlerAdapter {
 
         Map<String, String> paramMap = createParamMap(request);
 
+        //4.handler 호출
         return controller.process(paramMap);
     }
 

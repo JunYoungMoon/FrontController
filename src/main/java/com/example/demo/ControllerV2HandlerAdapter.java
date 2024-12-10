@@ -20,6 +20,7 @@ public class ControllerV2HandlerAdapter implements MyHandlerAdapter {
         Map<String, String> paramMap = createParamMap(request);
         Map<String, Object> model = new HashMap<>();
 
+        //4.handler 호출
         String viewName = controller.process(paramMap, model);
         ModelView mv = new ModelView(viewName);
 

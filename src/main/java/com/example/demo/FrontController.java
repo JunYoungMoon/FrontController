@@ -35,7 +35,7 @@ public class FrontController extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-        // 요청 URI에 따라 컨트롤러 호출
+        //1. 핸들러 조회
         Object handler = getHandler(request);
 
         if (handler == null) {
@@ -43,10 +43,14 @@ public class FrontController extends HttpServlet {
             return;
         }
 
+        //2.핸들러를 처리할 수 있는 핸들러 어댑터 조회
         MyHandlerAdapter adapter = getHandlerAdapter(handler);
+        //3,5. handle(handler), ModelView 반환
         ModelView mv = adapter.handle(request, response, handler);
 
+        //6,7. viewResolver호출, MyView 반환
         MyView view = viewResolver(mv.getViewName());
+        //8.render(model)호출
         view.render(mv.getModel(), request, response);
     }
 
